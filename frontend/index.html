@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chat</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-mode">
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <div class="logo">🤖 AI Chat</div>
+        <button class="new-chat-btn" onclick="newChat()">+ گفتوگۆی نوێ</button>
+    </div>
+
+    <div class="model-select-wrapper">
+        <label>مۆدێل:</label>
+        <select id="modelSelect" onchange="changeModel(this.value)">
+            <option value="llama-3.1-70b-versatile">LLaMA 3.1 70B ⭐</option>
+            <option value="llama-3.1-8b-instant">LLaMA 3.1 8B (خێرا)</option>
+            <option value="mixtral-8x7b-32768">Mixtral 8x7B</option>
+            <option value="gemma2-9b-it">Gemma 2 9B</option>
+        </select>
+    </div>
+
+    <div class="chat-history" id="chatHistory"></div>
+
+    <div class="sidebar-footer">
+        <div class="status-indicator" id="statusIndicator">
+            <span class="status-dot online" id="statusDot"></span>
+            <span id="statusText">Groq API ئامادەیە</span>
+        </div>
+        <button class="theme-toggle" onclick="toggleTheme()">☀️ ڕووناک</button>
+    </div>
+</div>
+
+<!-- Main -->
+<div class="main">
+    <div class="topbar">
+        <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+        <span class="current-model" id="currentModelLabel">LLaMA 3.1 70B</span>
+        <span class="powered-by">Powered by Groq ⚡</span>
+    </div>
+
+    <div class="messages-container" id="messagesContainer">
+        <div class="welcome-screen" id="welcomeScreen">
+            <div class="welcome-icon">🤖</div>
+            <h1>AI Chat</h1>
+            <p>پرسیارێک بکە — وەڵامی دەدات!</p>
+            <div class="suggestions">
+                <button onclick="sendSuggestion('سڵاو، خۆت بناسێنە')">سڵاو، خۆت بناسێنە</button>
+                <button onclick="sendSuggestion('Python چییە؟')">Python چییە؟</button>
+                <button onclick="sendSuggestion('کۆدی Hello World بنووسە')">کۆدی Hello World</button>
+                <button onclick="sendSuggestion('Explain quantum computing simply')">Quantum Computing</button>
+                <button onclick="sendSuggestion('یەک چیرۆکی کورد بنووسە')">یەک چیرۆکی کورد</button>
+                <button onclick="sendSuggestion('ئەمانەی باشترین زمانی پرۆگرامنووسی؟')">باشترین زمان؟</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="input-area">
+        <div class="input-wrapper">
+            <textarea
+                id="userInput"
+                placeholder="پرسیارەکەت بنووسە... (Enter بنێرە، Shift+Enter هێڵی نوێ)"
+                rows="1"
+                onkeydown="handleKeyDown(event)"
+                oninput="autoResize(this)"
+            ></textarea>
+            <button class="send-btn" id="sendBtn" onclick="sendMessage()">
+                <span id="sendIcon">➤</span>
+            </button>
+        </div>
+        <div class="input-footer">⚡ Groq AI — زۆر خێرا &nbsp;|&nbsp; AI دەتوانێت هەڵە بکات</div>
+    </div>
+</div>
+
+<script src="chat.js"></script>
+</body>
+</html>
